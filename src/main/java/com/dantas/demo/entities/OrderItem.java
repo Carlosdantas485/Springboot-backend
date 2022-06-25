@@ -8,15 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.dantas.demo.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	//como é um id composto utiliza-se o @EmbeddedId
+	// como é um id composto utiliza-se o @EmbeddedId
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 
 	private Integer quantity;
 	private Double price;
@@ -38,7 +39,10 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	// Corta o loop
+	
 	// criar o get da order
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -49,8 +53,8 @@ public class OrderItem implements Serializable {
 	}
 
 	// criar o get da Product
-	public Order getProduct() {
-		return id.getOrder();
+	public Product getProduct() {
+		return id.getProduct();
 	}
 
 	// criar o set da order
