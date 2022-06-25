@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "td_category")
+@Table(name = "tb_category")
 public class Category implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +25,9 @@ public class Category implements Serializable{
 	private Long id;
 	private String name;
 	
-	@Transient
+	@JsonIgnore
+	//faz a relacao de muitos para muito da entidade da colecao do produto 
+	@ManyToMany(mappedBy = "categosires")
 	private Set<Product> products= new HashSet<>();
 	
 	public Category() {

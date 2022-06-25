@@ -9,8 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -20,22 +22,33 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String neme;
+	private String name;
 	private String description;
 	private Double price;
 	private String imgUrl;
 	
-	@Transient
+	//transforma essas colecoes em uma tabela de asociacao 
+	@ManyToMany
+	//chase estrangeira que vao se relacionar
+	@JoinTable(
+			//nome da tabela de asociacao
+			name = "tb_product_category", 
+			//chave estrangeira referenta a abela daentidade do produto 
+			joinColumns = @JoinColumn(name = "product_id"),
+			//chave estrangeira da entidade categoria categoria
+			inverseJoinColumns = @JoinColumn(name = "category_id")
+			)
+	//nome/colecao de categorias
 	private Set<Category> categosires = new HashSet<>();
-	
-	public Product(){
-	
+
+	public Product() {
+
 	}
 
-	public Product(Long id, String neme, String description, Double price, String imgUrl) {
+	public Product(Long id, String name, String description, Double price, String imgUrl) {
 		super();
 		this.id = id;
-		this.neme = neme;
+		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
@@ -50,11 +63,11 @@ public class Product implements Serializable {
 	}
 
 	public String getNeme() {
-		return neme;
+		return name;
 	}
 
-	public void setNeme(String neme) {
-		this.neme = neme;
+	public void setNeme(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -101,5 +114,5 @@ public class Product implements Serializable {
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

@@ -45,13 +45,33 @@ public class TestConfig implements CommandLineRunner {
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 		
-		Product p1 = new Product(null, "The Lord of the Rings", "Aqui vai alumas palavras aleatorias", 90.5, "");
+		Product p1 = new Product(null, "The Lord of the Rings", "Aqui vai alumas palavras aleatorias", 90.5,"");
 		Product p2 = new Product(null, "Smart TV", "frase de impacto para teste", 2190.0, "");
 		Product p3 = new Product(null, "Mackbook Pro", "colocar palavras bonitas teste", 1250.0, "");
 		Product p4 = new Product(null, "PC Gamer", "comprar um pc gamer nas lojas online", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Demmies", "Este livro e muito bom para ler", 100.99,"");
 		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		//Adiciona o produto "p1" na categoria "cat2"
+		p1.getCategosires().add(cat2);
+		
+		//Adiciona o produto "p2" na categoria "cat1"
+		p2.getCategosires().add(cat1);
+		
+		//Adiciona o produto "p3" na categoria "cat3"
+		p2.getCategosires().add(cat3);
+		
+		//Adiciona o produto "p2" na categoria "cat3"
+		p3.getCategosires().add(cat3);
+		
+		//Adiciona o produto "p4" na categoria "cat5"
+		p4.getCategosires().add(cat3);
+		
+		//Adiciona o produto "p5" na categoria "cat2"
+		p5.getCategosires().add(cat2);
+		
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		
 		// O null no campo ID indica que i ID será gerado automaticamnete
