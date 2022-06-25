@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_Accounts")
 public class User implements Serializable{
@@ -27,6 +29,8 @@ public class User implements Serializable{
 	private String password;
 	private String saldo;
 	
+	//resolve o problema do JSON em loop
+	@JsonIgnore
 	//para falar que um usuario pode ter varios pedidos
 	@OneToMany(mappedBy = "client")
 	private List <Order> orders = new ArrayList<>();
