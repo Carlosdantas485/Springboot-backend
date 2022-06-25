@@ -20,14 +20,14 @@ public class OrderResouce {
 	@Autowired
 	private OrderService service;
 	
-	//Ira retornar a lista de usuarios
+	//Ira retornar a lista de Ordens
 	@GetMapping
 	public ResponseEntity<List> findAll(){
 		List<Order> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
-	//Ira retornar a lista de usuarios por ID
+	//Ira retornar a lista de Ordens por ID
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
 		Order obj = service.findById(id);

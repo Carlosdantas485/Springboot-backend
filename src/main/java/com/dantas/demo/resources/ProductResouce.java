@@ -20,14 +20,14 @@ public class ProductResouce {
 	@Autowired
 	private ProductService service;
 	
-	//Ira retornar a lista de usuarios
+	//Ira retornar a lista de Produtos
 	@GetMapping
 	public ResponseEntity<List> findAll(){
 		List<Product> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
-	//Ira retornar a lista de usuarios por ID
+	//Ira retornar a lista de produtos por ID
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id){
 		Product obj = service.findById(id);

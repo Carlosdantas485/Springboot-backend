@@ -12,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -26,20 +29,23 @@ public class Product implements Serializable {
 	private String description;
 	private Double price;
 	private String imgUrl;
-	
-	//transforma essas colecoes em uma tabela de asociacao 
+
+	// transforma essas colecoes em uma tabela de asociacao
 	@ManyToMany
-	//chase estrangeira que vao se relacionar
+	// chase estrangeira que vao se relacionar
 	@JoinTable(
-			//nome da tabela de asociacao
-			name = "tb_product_category", 
-			//chave estrangeira referenta a abela daentidade do produto 
+			// nome da tabela de asociacao
+			name = "tb_product_category",
+			// chave estrangeira referenta a abela daentidade do produto
 			joinColumns = @JoinColumn(name = "product_id"),
-			//chave estrangeira da entidade categoria categoria
-			inverseJoinColumns = @JoinColumn(name = "category_id")
-			)
-	//nome/colecao de categorias
+			// chave estrangeira da entidade categoria categoria
+			inverseJoinColumns = @JoinColumn(name = "category_id"))
+	// nome/colecao de categorias
 	private Set<Category> categosires = new HashSet<>();
+
+	@OneToMany(mappedBy = "id.product")
+	// nome/colecao de OrderItem
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Product() {
 
@@ -62,11 +68,11 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	public String getNeme() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNeme(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -96,6 +102,19 @@ public class Product implements Serializable {
 
 	public Set<Category> getCategosires() {
 		return categosires;
+	}
+
+	// Corta o loop
+	@JsonIgnore
+	// realciona cada orderItem com sua order
+	public Set<Order> getOrders() {
+		Set<Order> set = new HashSet<>();
+		// para cada ( OrderItem pedido1 cntido na lista de items)
+		for (OrderItem x : items) {
+			set.add(x.getOrder());
+		}
+
+		return set;
 	}
 
 	@Override

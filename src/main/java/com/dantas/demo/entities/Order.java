@@ -41,7 +41,6 @@ public class Order implements Serializable {
 	// para falar que um pedido tem varios items  
 	// E no atributo a ser mapeado serao id pois ele é quam tem o pedido
 	@OneToMany(mappedBy = "id.order")
-	
 	//criar o set deste atributo
 	private Set<OrderItem> items = new HashSet<>();
 	

@@ -40,9 +40,8 @@ public class OrderItem implements Serializable {
 	}
 
 	// Corta o loop
-	
-	// criar o get da order
 	@JsonIgnore
+	// criar o get da order
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -52,6 +51,7 @@ public class OrderItem implements Serializable {
 		id.setOrder(order);
 	}
 
+	
 	// criar o get da Product
 	public Product getProduct() {
 		return id.getProduct();

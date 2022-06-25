@@ -20,14 +20,14 @@ public class CategoryResouce {
 	@Autowired
 	private CategoryService service;
 	
-	//Ira retornar a lista de usuarios
+	//Ira retornar a lista de categorias
 	@GetMapping
 	public ResponseEntity<List> findAll(){
 		List<Category> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
-	//Ira retornar a lista de usuarios por ID
+	//Ira retornar a lista de categorias por ID
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Category> findById(@PathVariable Long id){
 		Category obj = service.findById(id);
