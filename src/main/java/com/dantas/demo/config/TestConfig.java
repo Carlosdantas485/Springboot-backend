@@ -54,7 +54,7 @@ public class TestConfig implements CommandLineRunner {
 
 		Product p1 = new Product(null, "The Lord of the Rings", "Aqui vai alumas palavras aleatorias", 90.5, "");
 		Product p2 = new Product(null, "Smart TV", "frase de impacto para teste", 2190.0, "");
-		Product p3 = new Product(null, "Mackbook Pro", "colocar palavras bonitas teste", 1250.0, "");
+		Product p3 = new Product(null, "Mackbook Pro", "colocar palavras bonitas teste", 1270.0, "");
 		Product p4 = new Product(null, "PC Gamer", "comprar um pc gamer nas lojas online", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Demmies", "Este livro e muito bom para ler", 100.99, "");
 
