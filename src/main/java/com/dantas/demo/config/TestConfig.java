@@ -75,8 +75,8 @@ public class TestConfig implements CommandLineRunner {
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		
 		// O null no campo ID indica que i ID será gerado automaticamnete
-		User u1 = new User(null, "Maria do Carmo", "maria@123", "987654321", "senha", "1000");
-		User u2 = new User(null, "Carlos Dantas", "carlos@123", "987654321", "senha", "5000");
+		User u1 = new User(null, "Maria do Carmo", "maria@123", "987654321", "senha", 1000.0);
+		User u2 = new User(null, "Carlos Dantas", "carlos@123", "987654321", "senha", 5000.0);
 		
 		Order o1 = new Order(null, Instant.parse("2022-06-20T19:53:07z"), OrderStatus.PAID, u1);
 		Order o2 = new Order(null, Instant.parse("2022-07-21T03:42:10z"), OrderStatus.WAITING_PAYMANT, u2);

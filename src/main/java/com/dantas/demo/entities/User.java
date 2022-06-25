@@ -27,7 +27,7 @@ public class User implements Serializable{
 	private String email;
 	private String phone;
 	private String password;
-	private String saldo;
+	private Double balance;
 	
 	//resolve o problema do JSON em loop
 	@JsonIgnore
@@ -39,14 +39,14 @@ public class User implements Serializable{
 		
 	}
 
-	public User(Long id, String name, String email, String phone, String password, String saldo) {
+	public User(Long id, String name, String email, String phone, String password, Double balance) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
-		this.saldo = saldo;
+		this.balance = balance;
 	}
 
 	public Long getId() {
@@ -89,12 +89,12 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public String getSaldo() {
-		return saldo;
+	public Double getSaldo() {
+		return balance;
 	}
 
-	public void setSaldo(String saldo) {
-		this.saldo = saldo;
+	public void setSaldo(Double balance) {
+		this.balance = balance;
 	}
 
 	public static long getSerialversionuid() {
