@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,14 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.dantas.demo.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_Orders")
+@Table(name = "tb_orders")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +31,7 @@ public class Order implements Serializable {
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'z'", timezone = "GMT")
 	private Instant moment;
-	
+
 	private Integer orderStatus;
 
 	// para falar que um pedito tem um usuario
@@ -38,16 +39,21 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id")
 	private User client;
 
-	// para falar que um pedido tem varios items  
+	// nome da classe a ser mapeada, cascade = pagamento e order ter o mesmo id
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+
+	private Payment payment;
+
+	// para falar que um pedido tem varios items
 	// E no atributo a ser mapeado serao id pois ele é quam tem o pedido
 	@OneToMany(mappedBy = "id.order")
-	//criar o set deste atributo
+	// criar o set deste atributo
 	private Set<OrderItem> items = new HashSet<>();
-	
+
 	public Order() {
 	}
 
-	public Order(Long id, Instant moment,OrderStatus orderStatus, User client) {
+	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -72,7 +78,7 @@ public class Order implements Serializable {
 	}
 
 	public OrderStatus getOrderStatus() {
-		return OrderStatus.valueOf(orderStatus) ;
+		return OrderStatus.valueOf(orderStatus);
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
@@ -88,9 +94,17 @@ public class Order implements Serializable {
 	public void setClient(User client) {
 		this.client = client;
 	}
-	
-	//set do atributo OrderItem
-	public Set<OrderItem> getItems(){
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	// set do atributo OrderItem
+	public Set<OrderItem> getItems() {
 		return items;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.dantas.demo.entities.Category;
 import com.dantas.demo.entities.Order;
 import com.dantas.demo.entities.OrderItem;
+import com.dantas.demo.entities.Payment;
 import com.dantas.demo.entities.Product;
 import com.dantas.demo.entities.User;
 import com.dantas.demo.entities.enums.OrderStatus;
@@ -101,7 +102,9 @@ public class TestConfig implements CommandLineRunner {
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
-		
+		Payment pay1 = new Payment(null, Instant.parse("2022-06-20T21:53:07z"), o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
 
 	}
 
