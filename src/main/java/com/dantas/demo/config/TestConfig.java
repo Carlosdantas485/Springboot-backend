@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.dantas.demo.entities.Category;
 import com.dantas.demo.entities.Order;
 import com.dantas.demo.entities.User;
 import com.dantas.demo.entities.enums.OrderStatus;
+import com.dantas.demo.repositories.CategoryRepository;
 import com.dantas.demo.repositories.OrderRepository;
 import com.dantas.demo.repositories.UserRepository;
 
@@ -28,8 +30,18 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Category cat1 = new Category(null, "Eletronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		
 		// O null no campo ID indica que i ID será gerado automaticamnete
 		User u1 = new User(null, "Maria do Carmo", "maria@123", "987654321", "senha", "1000");
 		User u2 = new User(null, "Carlos Dantas", "carlos@123", "987654321", "senha", "5000");
