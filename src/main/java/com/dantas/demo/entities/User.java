@@ -16,27 +16,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_Accounts")
-public class User implements Serializable{
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
 	private Double balance;
-	
-	//resolve o problema do JSON em loop
+
+	// resolve o problema do JSON em loop
 	@JsonIgnore
-	//para falar que um usuario pode ter varios pedidos
+	// para falar que um usuario pode ter varios pedidos
 	@OneToMany(mappedBy = "client")
-	private List <Order> orders = new ArrayList<>();
-	
+	private List<Order> orders = new ArrayList<>();
+
 	public User() {
-		
+
 	}
 
 	public User(Long id, String name, String email, String phone, String password, Double balance) {
@@ -100,11 +100,10 @@ public class User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	public List <Order> getOrders() {
+
+	public List<Order> getOrders() {
 		return orders;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -122,6 +121,5 @@ public class User implements Serializable{
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

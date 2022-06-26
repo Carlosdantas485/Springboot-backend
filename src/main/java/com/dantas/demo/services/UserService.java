@@ -3,6 +3,7 @@ package com.dantas.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,24 +32,21 @@ public class UserService {
 	public User insert(User obj) {
 		return repository.save(obj);
 	}
-	
+
 	// metodo para a delecao do usuario
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
-	
-	//metodo para atualizar um usuario
+
+	// metodo para atualizar um usuario
 	// Passando o id do usuario e o objeto com o contudo a ser atualizado
 	public User update(Long id, User obj) {
-		//getOne nao vai no banco ainda. e monitorado pelo jpa
-		@SuppressWarnings("deprecation")
 		User entity = repository.getReferenceById(id);
-		updatedata(entity, obj);
-		return repository.save(obj);
+		updateData(entity, obj);
+		return repository.save(entity);
 	}
-
-	private void updatedata(User entity, User obj) {
-		// o objeto antigo ira setar seu valor com base no valor do novo objeto
+	
+	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
 		entity.setPhone(obj.getPhone());
