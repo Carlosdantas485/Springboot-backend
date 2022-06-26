@@ -28,6 +28,11 @@ public class UserService  {
 		return obj.get();
 	}
 	
+	//metodo para a incercao do objeto no banco de dados
+	public User insert(User obj) {
+		return repository.save(obj);
+	}
+	
 	
 	
 
