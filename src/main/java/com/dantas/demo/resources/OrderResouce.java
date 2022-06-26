@@ -15,24 +15,23 @@ import com.dantas.demo.services.OrderService;
 @RestController
 @RequestMapping(value = "/orders")
 public class OrderResouce {
-	
-	//dependencia para o servce 
+
+	// dependencia para o servce
 	@Autowired
 	private OrderService service;
-	
-	//Ira retornar a lista de Ordens
+
+	// Ira retornar a lista de Ordens
 	@GetMapping
-	public ResponseEntity<List> findAll(){
+	public ResponseEntity<List> findAll() {
 		List<Order> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
-	
-	//Ira retornar a lista de Ordens por ID
+
+	// Ira retornar a lista de Ordens por ID
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id){
+	public ResponseEntity<Order> findById(@PathVariable Long id) {
 		Order obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
+
 }
