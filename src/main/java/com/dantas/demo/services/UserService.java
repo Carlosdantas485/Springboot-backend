@@ -36,5 +36,22 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	//metodo para atualizar um usuario
+	// Passando o id do usuario e o objeto com o contudo a ser atualizado
+	public User update(Long id, User obj) {
+		//getOne nao vai no banco ainda. e monitorado pelo jpa
+		@SuppressWarnings("deprecation")
+		User entity = repository.getReferenceById(id);
+		updatedata(entity, obj);
+		return repository.save(obj);
+	}
+
+	private void updatedata(User entity, User obj) {
+		// o objeto antigo ira setar seu valor com base no valor do novo objeto
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
 
 }

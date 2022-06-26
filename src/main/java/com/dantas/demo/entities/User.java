@@ -89,11 +89,11 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public Double getSaldo() {
+	public Double getBalance() {
 		return balance;
 	}
 
-	public void setSaldo(Double balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 
